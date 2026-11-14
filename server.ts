@@ -890,8 +890,8 @@ async function startServer() {
   }
 
   const PORT = Number(process.env.PORT) || 5000;
-  app.listen(PORT, '0.0.0.0', () => {
-    console.log(`CrisisGrid AI server running on http://0.0.0.0:${PORT}`);
+  app.listen(PORT, () => {
+    console.log(`CrisisGrid AI server running on port ${PORT} (dual-stack IPv4/IPv6)`);
   });
 }
 
