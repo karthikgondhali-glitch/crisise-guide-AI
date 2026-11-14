@@ -4,5 +4,6 @@ dist/
 coverage/
 .DS_Store
 *.log
+tunnel.ps1
 .env*
 !.env.example
