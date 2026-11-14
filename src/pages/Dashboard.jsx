@@ -18,6 +18,8 @@ import AllocationPieChart from '../components/AllocationPieChart.jsx';
 import DependencyPanel from '../components/DependencyPanel.jsx';
 import RecommendationPanel from '../components/RecommendationPanel.jsx';
 import ParticleCloakPlate from '../components/ParticleCloakPlate.jsx';
+import DigitalTwinCity from '../components/DigitalTwinCity.jsx';
+import { Building2, Sparkles, Layers } from 'lucide-react';
 
 export default function Dashboard({
   simulation,
@@ -34,6 +36,7 @@ export default function Dashboard({
 }) {
   const [editingId, setEditingId] = useState(null);
   const [noteInput, setNoteInput] = useState('');
+  const [show3dTwin, setShow3dTwin] = useState(true);
 
   if (!simulation) {
     return (
@@ -55,12 +58,56 @@ export default function Dashboard({
 
   return (
     <div className="space-y-6">
-      {/* Interactive Particle Cloak Hero Plate */}
-      <ParticleCloakPlate
-        headline={`${simulation.scenario} Dispatch`}
-        caption={`${simulation.supply} MW Supply · ${simulation.total_demand} MW Demand · ${simulation.services_online}/4 Services Online · ${simulation.status_message}`}
-        safe={simulation.safe}
-      />
+      {/* 3D vs 2D Hero Mode Bar */}
+      <div className="flex items-center justify-between bg-neutral-950/80 border border-cyan-500/20 rounded-xl px-4 py-2.5 backdrop-blur-sm">
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+          <span className="text-xs font-bold text-white tracking-wide">
+            CrisisGrid AI Command Center
+          </span>
+          <span className="text-[10px] font-mono text-neutral-400 hidden sm:inline">
+            · Low-Poly Multi-Agent Smart City
+          </span>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setShow3dTwin(true)}
+            className={`px-3 py-1 rounded-lg text-xs font-medium flex items-center gap-1.5 transition cursor-pointer ${
+              show3dTwin
+                ? 'bg-cyan-400 text-black font-bold shadow-[0_0_12px_rgba(34,211,238,0.5)]'
+                : 'bg-neutral-900 text-neutral-400 hover:text-white border border-neutral-800'
+            }`}
+          >
+            <Building2 className="w-3.5 h-3.5" />
+            <span>3D Digital Twin</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setShow3dTwin(false)}
+            className={`px-3 py-1 rounded-lg text-xs font-medium flex items-center gap-1.5 transition cursor-pointer ${
+              !show3dTwin
+                ? 'bg-cyan-400 text-black font-bold shadow-[0_0_12px_rgba(34,211,238,0.5)]'
+                : 'bg-neutral-900 text-neutral-400 hover:text-white border border-neutral-800'
+            }`}
+          >
+            <Layers className="w-3.5 h-3.5" />
+            <span>2D Cloak View</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Hero View: 3D Digital Twin or 2D Particle Cloak */}
+      {show3dTwin ? (
+        <DigitalTwinCity initialScenario={simulation.scenario} />
+      ) : (
+        <ParticleCloakPlate
+          headline={`${simulation.scenario} Dispatch`}
+          caption={`${simulation.supply} MW Supply · ${simulation.total_demand} MW Demand · ${simulation.services_online}/4 Services Online · ${simulation.status_message}`}
+          safe={simulation.safe}
+        />
+      )}
 
       {/* Quick Scenario Control Strip */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-neutral-950/80 backdrop-blur-sm border border-cyan-500/20 rounded-xl px-6 py-4">

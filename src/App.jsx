@@ -13,6 +13,7 @@ import Scenario from './pages/Scenario.jsx';
 import Negotiation from './pages/Negotiation.jsx';
 import Results from './pages/Results.jsx';
 import Comparison from './pages/Comparison.jsx';
+import DigitalTwinView from './pages/DigitalTwinView.jsx';
 import {
   fetchScenarios,
   runSimulation,
@@ -33,6 +34,7 @@ function TopBar({ simulation, onEmergency, emergencyLoading }) {
   const location = useLocation();
   const routeNames = {
     '/': 'Dashboard',
+    '/digital-twin': '3D Digital Twin City',
     '/scenario': 'Scenario Setup',
     '/negotiation': 'Negotiation',
     '/results': 'Results',
@@ -277,6 +279,10 @@ export default function App() {
                     savingToCloud={savingToCloud}
                   />
                 }
+              />
+              <Route
+                path="/digital-twin"
+                element={<DigitalTwinView simulation={simulation} />}
               />
               <Route
                 path="/scenario"

@@ -10,11 +10,13 @@ import {
   LogIn,
   LogOut,
   Save,
+  Building2,
 } from 'lucide-react';
 import EmergencyButton from './EmergencyButton.jsx';
 
 const NAV_ITEMS = [
   { to: '/', label: 'Dashboard', icon: LayoutDashboard, end: true },
+  { to: '/digital-twin', label: '3D Digital Twin', icon: Building2, end: false },
   { to: '/scenario', label: 'Scenario Setup', icon: Sliders, end: false },
   { to: '/negotiation', label: 'Negotiation', icon: MessageSquareCode, end: false },
   { to: '/results', label: 'Results', icon: BarChart3, end: false },
