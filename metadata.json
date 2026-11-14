@@ -1,0 +1,6 @@
+{
+  "name": "CrisisGrid AI",
+  "description": "Autonomous multi-agent disaster response platform that negotiates and allocates limited electricity across critical infrastructure services during emergencies.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

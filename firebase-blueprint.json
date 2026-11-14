@@ -1,0 +1,95 @@
+{
+  "entities": {
+    "SimulationRecord": {
+      "title": "SimulationRecord",
+      "description": "Persisted disaster power negotiation simulation run owned by an authenticated user.",
+      "type": "object",
+      "properties": {
+        "ownerId": {
+          "type": "string",
+          "description": "Firebase Auth UID of the user who executed the simulation.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "scenario": {
+          "type": "string",
+          "description": "Name of the simulated disaster scenario.",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "supply": {
+          "type": "number",
+          "description": "Available electricity supply in MW."
+        },
+        "totalDemand": {
+          "type": "number",
+          "description": "Aggregate nominal power demand across all 4 critical services in MW."
+        },
+        "safe": {
+          "type": "boolean",
+          "description": "Whether all critical services received at least their minimum safe power."
+        },
+        "statusMessage": {
+          "type": "string",
+          "description": "Outcome summary from the negotiation engine.",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "hospitalAllocated": {
+          "type": "number",
+          "description": "Power allocated to Hospital in MW."
+        },
+        "waterAllocated": {
+          "type": "number",
+          "description": "Power allocated to Water Supply in MW."
+        },
+        "emergencyAllocated": {
+          "type": "number",
+          "description": "Power allocated to Emergency Services in MW."
+        },
+        "telecomAllocated": {
+          "type": "number",
+          "description": "Power allocated to Telecom Network in MW."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Optional operator annotation for the simulation run.",
+          "maxLength": 300
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the simulation record was created."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the simulation record was last updated."
+        }
+      },
+      "required": [
+        "ownerId",
+        "scenario",
+        "supply",
+        "totalDemand",
+        "safe",
+        "statusMessage",
+        "hospitalAllocated",
+        "waterAllocated",
+        "emergencyAllocated",
+        "telecomAllocated",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/simulations/{simulationId}": {
+      "schema": {
+        "$ref": "#/entities/SimulationRecord"
+      },
+      "description": "Stores user-owned disaster simulation runs and power allocation outcomes."
+    }
+  }
+}
