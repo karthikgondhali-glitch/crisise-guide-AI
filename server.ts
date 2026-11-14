@@ -889,7 +889,7 @@ async function startServer() {
     });
   }
 
-  const PORT = 3000;
+  const PORT = 5000;
   app.listen(PORT, '0.0.0.0', () => {
     console.log(`CrisisGrid AI server running on http://0.0.0.0:${PORT}`);
   });
